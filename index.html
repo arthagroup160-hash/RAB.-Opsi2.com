@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAB Buka Lahan 4 Hektar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hijau:   #1a5c2e;
+    --hijau2:  #2d7d46;
+    --hijau3:  #4caf6e;
+    --daun:    #e8f5e9;
+    --kuning:  #f9c74f;
+    --tanah:   #8b5e3c;
+    --krem:    #fdf6ec;
+    --putih:   #ffffff;
+    --abu:     #f4f4f2;
+    --teks:    #1c1c1a;
+    --border:  #c8e6c9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--krem);
+    color: var(--teks);
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(26,92,46,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(249,199,79,0.08) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--hijau) 0%, var(--hijau2) 60%, #3a9e58 100%);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--kuning); }
+  .hero-sub {
+    color: rgba(255,255,255,0.82);
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 28px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: rgba(255,255,255,0.13);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 10px;
+    padding: 10px 18px;
+    color: #fff;
+    font-size: 13px;
+  }
+  .stat-pill strong { display: block; font-size: 18px; font-weight: 700; color: var(--kuning); }
+
+  /* ===== TABS ===== */
+  .tabs-wrap { max-width: 1100px; margin: 0 auto; padding: 28px 40px 0; }
+  .tabs {
+    display: flex;
+    gap: 6px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    padding: 10px 22px;
+    border: none;
+    background: transparent;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #888;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all .2s;
+    border-radius: 6px 6px 0 0;
+  }
+  .tab-btn.active {
+    color: var(--hijau);
+    border-bottom-color: var(--hijau);
+    background: var(--daun);
+  }
+  .tab-btn:hover:not(.active) { color: var(--hijau2); background: var(--daun); }
+
+  /* ===== CONTENT ===== */
+  .content { max-width: 1100px; margin: 0 auto; padding: 28px 40px 60px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeUp .35s ease; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ===== SECTION TITLE ===== */
+  .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--hijau);
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-title .ico { font-size: 20px; }
+
+  /* ===== TABLE ===== */
+  .tbl-wrap { overflow-x: auto; border-radius: 12px; box-shadow: 0 2px 16px rgba(26,92,46,0.08); margin-bottom: 32px; }
+  table { width: 100%; border-collapse: collapse; background: var(--putih); }
+  thead tr { background: var(--hijau); color: #fff; }
+  thead th {
+    padding: 12px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  thead th:nth-child(2), thead th:last-child { text-align: left; }
+  tbody tr:nth-child(even) { background: var(--daun); }
+  tbody tr:hover { background: #d4edda; }
+  tbody td {
+    padding: 11px 14px;
+    font-size: 13.5px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  tbody td:nth-child(2) { text-align: left; font-weight: 600; }
+  tbody td:last-child { text-align: left; color: #666; font-size: 12px; }
+  .section-row td {
+    background: var(--hijau2) !important;
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 13px;
+    text-align: left !important;
+    padding: 9px 14px;
+  }
+  .total-row td {
+    background: var(--hijau) !important;
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  .rp { color: var(--hijau); font-weight: 700; }
+
+  /* ===== CARDS GRID ===== */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .card {
+    background: var(--putih);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 2px 12px rgba(26,92,46,0.09);
+    border-left: 4px solid var(--hijau3);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(26,92,46,0.14); }
+  .card .label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #888; margin-bottom: 6px; }
+  .card .value { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--hijau); font-weight: 700; line-height: 1; }
+  .card .sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+  .card.accent { border-left-color: var(--kuning); }
+  .card.accent .value { color: var(--tanah); }
+  .card.green-fill { background: var(--hijau); border-left-color: var(--kuning); }
+  .card.green-fill .label, .card.green-fill .sub { color: rgba(255,255,255,0.7); }
+  .card.green-fill .value { color: var(--kuning); }
+
+  /* ===== ANALISIS BOX ===== */
+  .analisis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .analisis-box {
+    background: var(--putih);
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 12px rgba(26,92,46,0.08);
+  }
+  .analisis-box h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 12px; }
+  .analisis-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--border); }
+  .analisis-row:last-child { border-bottom: none; }
+  .analisis-row .key { font-size: 13px; color: #555; }
+  .analisis-row .val { font-weight: 700; font-size: 14px; color: var(--hijau); }
+  .analisis-row .val.laba { color: #1a7a3f; }
+  .analisis-row .val.ratio { color: var(--tanah); font-family: 'Playfair Display', serif; font-size: 20px; }
+
+  /* ===== TIMELINE ===== */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--hijau3), var(--daun));
+  }
+  .tl-phase { margin-bottom: 28px; }
+  .tl-phase-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--hijau);
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .tl-phase-title::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--hijau);
+    border: 3px solid var(--krem);
+    box-shadow: 0 0 0 2px var(--hijau3);
+  }
+  .tl-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .tl-item {
+    background: var(--putih);
+    border-radius: 10px;
+    padding: 12px 14px;
+    border-left: 3px solid var(--hijau3);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .tl-item .nama { font-size: 13px; font-weight: 600; color: #333; }
+  .tl-item .waktu { font-size: 11px; color: #888; margin-top: 3px; }
+  .tl-item .hok { font-size: 11px; color: var(--hijau); font-weight: 600; margin-top: 3px; }
+
+  /* ===== INFO CHIPS ===== */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .chip {
+    background: var(--daun);
+    border: 1px solid var(--border);
+    color: var(--hijau);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  /* ===== KOMODITAS CARDS ===== */
+  .komoditas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 28px; }
+  .kom-card {
+    background: var(--putih);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 2px 14px rgba(26,92,46,0.09);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .kom-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+  }
+  .kom-card.labu::before { background: #e67e22; }
+  .kom-card.jagung::before { background: #f9c74f; }
+  .kom-card.pisang::before { background: #76c442; }
+  .kom-icon { font-size: 36px; margin-bottom: 10px; }
+  .kom-nama { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--hijau); font-weight: 700; margin-bottom: 8px; }
+  .kom-detail { font-size: 12px; color: #666; line-height: 1.7; }
+  .kom-harga { font-size: 20px; font-weight: 700; color: var(--hijau); margin: 10px 0 4px; font-family: 'Playfair Display', serif; }
+  .kom-est { font-size: 11px; background: var(--daun); border-radius: 8px; padding: 6px 10px; margin-top: 8px; color: var(--hijau2); font-weight: 600; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 700px) {
+    .hero, .tabs-wrap, .content { padding-left: 16px; padding-right: 16px; }
+    .analisis-grid, .komoditas-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 8px; }
+  }
+
+  /* ===== OPSI TOGGLE ===== */
+  .opsi-toggle-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--putih);
+    border: 2px solid var(--border);
+    border-radius: 40px;
+    padding: 4px;
+    width: fit-content;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(26,92,46,0.08);
+  }
+  .opsi-btn {
+    padding: 9px 24px;
+    border: none;
+    background: transparent;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #888;
+    cursor: pointer;
+    border-radius: 32px;
+    transition: all .25s;
+    line-height: 1.3;
+    text-align: center;
+  }
+  .opsi-btn.active {
+    background: var(--hijau);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(26,92,46,0.25);
+  }
+  .opsi-btn.active.bh { background: #7b3f9e; }
+  .opsi-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-hok  { background: #dceefb; color: #1a5c8a; }
+  .badge-bh   { background: #f0e6fa; color: #7b3f9e; }
+
+  /* Bagi Hasil highlight */
+  .bh-box {
+    background: linear-gradient(135deg, #7b3f9e 0%, #9c4fc7 100%);
+    border-radius: 16px;
+    padding: 22px 26px;
+    color: #fff;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bh-box::before {
+    content: '🤝';
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 56px;
+    opacity: 0.18;
+  }
+  .bh-box h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 8px; }
+  .bh-box p  { font-size: 13px; opacity: 0.88; line-height: 1.6; }
+  .bh-split {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .bh-pihak {
+    flex: 1;
+    min-width: 160px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .bh-pihak .pct { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #f9c74f; }
+  .bh-pihak .pnm { font-size: 12px; opacity: 0.9; margin-top: 2px; }
+  .bh-pihak .val { font-size: 16px; font-weight: 700; margin-top: 6px; color: #fff; }
+
+  .card.purple-fill { background: #7b3f9e; border-left-color: #f9c74f; }
+  .card.purple-fill .label, .card.purple-fill .sub { color: rgba(255,255,255,0.7); }
+  .card.purple-fill .value { color: #f9c74f; }
+
+  /* ===== PRINT ===== */
+  .print-btn {
+    float: right;
+    background: var(--hijau);
+    color: #fff;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s;
+    margin-top: -4px;
+  }
+  .print-btn:hover { background: var(--hijau2); }
+  @media print {
+    .tabs-wrap, .tab-btn, .print-btn { display: none !important; }
+    .tab-panel { display: block !important; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="badge">📋 Rencana Anggaran Biaya</div>
+    <h1>Buka Lahan Pertanian<br><span>4 Hektar</span></h1>
+    <p class="hero-sub">Labu Ceper · Jagung · Pisang Talasa Ambon &nbsp;|&nbsp; Dihitung Per Hektar</p>
+    <div class="hero-stats">
+      <div class="stat-pill"><strong>4 Ha</strong>Total Lahan</div>
+      <div class="stat-pill"><strong>3</strong>Komoditas Utama</div>
+      <div class="stat-pill"><strong>Rp 6.000</strong>Harga Labu/Butir</div>
+      <div class="stat-pill"><strong>Rp 9.000</strong>Harga Jagung/Kg</div>
+      <div class="stat-pill"><strong>≈20 Minggu</strong>Siklus Tanam</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('ringkasan',this)">📊 Ringkasan</button>
+    <button class="tab-btn" onclick="switchTab('komoditas',this)">🌿 Komoditas</button>
+    <button class="tab-btn" onclick="switchTab('saprodi',this)">🌱 Saprodi</button>
+    <button class="tab-btn" onclick="switchTab('tenagakerja',this)">👷 Tenaga Kerja</button>
+    <button class="tab-btn" onclick="switchTab('analisis',this)">📈 Analisis</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- ===================== TAB: RINGKASAN ===================== -->
+  <div id="tab-ringkasan" class="tab-panel active">
+    <button class="print-btn" onclick="window.print()">🖨️ Cetak</button>
+    <div class="sec-title"><span class="ico">📊</span> Ringkasan Biaya & Pendapatan</div>
+
+    <!-- TOGGLE OPSI -->
+    <div class="opsi-toggle-wrap">
+      <button class="opsi-btn active" id="btn-o1-rks" onclick="setOpsi(1)">
+        Opsi 1 – Upah HOK
+        <span class="opsi-badge badge-hok">Bayar Tunai</span>
+      </button>
+      <button class="opsi-btn bh" id="btn-o2-rks" onclick="setOpsi(2)">
+        Opsi 2 – Bagi Hasil
+        <span class="opsi-badge badge-bh">50 : 50</span>
+      </button>
+    </div>
+
+    <!-- OPSI 1 -->
+    <div id="rks-opsi1">
+      <div class="cards">
+        <div class="card">
+          <div class="label">Total Biaya 1 Hektar</div>
+          <div class="value" id="totalBiaya1Ha">—</div>
+          <div class="sub">Termasuk HOK & tak terduga</div>
+        </div>
+        <div class="card accent">
+          <div class="label">Total Biaya 4 Hektar</div>
+          <div class="value" id="totalBiaya4Ha">—</div>
+          <div class="sub">Total investasi</div>
+        </div>
+        <div class="card">
+          <div class="label">Pendapatan 1 Hektar</div>
+          <div class="value" id="totalPend1Ha">—</div>
+          <div class="sub">Estimasi kotor</div>
+        </div>
+        <div class="card green-fill">
+          <div class="label">Laba Bersih 1 Hektar</div>
+          <div class="value" id="laba1Ha">—</div>
+          <div class="sub">Estimasi net</div>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table id="tblBiaya">
+          <thead>
+            <tr>
+              <th style="width:40px">No</th>
+              <th>Komponen Biaya</th>
+              <th>Satuan</th>
+              <th>Vol</th>
+              <th>Harga Satuan</th>
+              <th>Total 1 Ha</th>
+              <th>Total 4 Ha</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody id="biayaTbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- OPSI 2 BAGI HASIL -->
+    <div id="rks-opsi2" style="display:none">
+      <div class="bh-box">
+        <h3>🤝 Sistem Kerjasama Bagi Hasil</h3>
+        <p>Tenaga kerja tidak dibayar tunai (HOK). Pengelola mengerjakan seluruh proses tanam hingga panen. Hasil penjualan dibagi rata setelah dikurangi biaya modal (saprodi, alat, irigasi).</p>
+        <div class="bh-split">
+          <div class="bh-pihak">
+            <div class="pct">50%</div>
+            <div class="pnm">🏦 Pemilik Modal & Lahan</div>
+            <div class="val" id="bh-modal-1ha">—</div>
+            <div style="font-size:11px;opacity:.8;margin-top:3px">per hektar</div>
+          </div>
+          <div class="bh-pihak">
+            <div class="pct">50%</div>
+            <div class="pnm">👨‍🌾 Pengelola</div>
+            <div class="val" id="bh-pengelola-1ha">—</div>
+            <div style="font-size:11px;opacity:.8;margin-top:3px">per hektar</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="label">Modal Dikeluarkan 1 Ha</div>
+          <div class="value" id="bh-modal-keluar">—</div>
+          <div class="sub">Tanpa biaya HOK</div>
+        </div>
+        <div class="card accent">
+          <div class="label">Modal Dikeluarkan 4 Ha</div>
+          <div class="value" id="bh-modal-keluar4">—</div>
+          <div class="sub">Total investasi modal</div>
+        </div>
+        <div class="card">
+          <div class="label">Total Pendapatan Kotor</div>
+          <div class="value" id="bh-pend-kotor">—</div>
+          <div class="sub">Per hektar</div>
+        </div>
+        <div class="card purple-fill">
+          <div class="label">Bagian Pemilik Modal (50%)</div>
+          <div class="value" id="bh-modal-1ha-card">—</div>
+          <div class="sub">Setelah bagi hasil</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table id="tblBiayaBH">
+          <thead>
+            <tr>
+              <th style="width:40px">No</th>
+              <th>Komponen Biaya Modal</th>
+              <th>Satuan</th>
+              <th>Vol</th>
+              <th>Harga Satuan</th>
+              <th>Total 1 Ha</th>
+              <th>Total 4 Ha</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody id="biayaBHTbody"></tbody>
+        </table>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr style="background:#7b3f9e">
+              <th colspan="4">SIMULASI BAGI HASIL PER HEKTAR</th>
+            </tr>
+            <tr style="background:#9c4fc7">
+              <th>Uraian</th><th>Per 1 Ha</th><th>Per 4 Ha</th><th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody id="bhSimTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TAB: KOMODITAS ===================== -->
+  <div id="tab-komoditas" class="tab-panel">
+    <div class="sec-title"><span class="ico">🌿</span> Detail Komoditas</div>
+    <div class="komoditas-grid">
+      <div class="kom-card labu">
+        <div class="kom-icon">🎃</div>
+        <div class="kom-nama">Labu Ceper</div>
+        <div class="kom-harga">Rp 6.000/butir</div>
+        <div class="kom-detail">
+          Jarak tanam: 2×3 m<br>
+          Populasi: ±3.000 lubang/ha<br>
+          Umur panen: 60–90 HST<br>
+          Produksi: 3.000 butir/ha
+        </div>
+        <div class="kom-est">💰 Est. Pendapatan: Rp 18.000.000/ha</div>
+      </div>
+      <div class="kom-card jagung">
+        <div class="kom-icon">🌽</div>
+        <div class="kom-nama">Jagung Hibrida</div>
+        <div class="kom-harga">Rp 9.000/kg</div>
+        <div class="kom-detail">
+          Jarak tanam: 75×25 cm<br>
+          Kebutuhan benih: 15 kg/ha<br>
+          Umur panen: 90–100 HST<br>
+          Produksi: ±4 ton/ha
+        </div>
+        <div class="kom-est">💰 Est. Pendapatan: Rp 36.000.000/ha</div>
+      </div>
+      <div class="kom-card pisang">
+        <div class="kom-icon">🍌</div>
+        <div class="kom-nama">Pisang Talasa Ambon</div>
+        <div class="kom-harga">Rp 15.000/sisir</div>
+        <div class="kom-detail">
+          Jarak tanam: 3×3 m<br>
+          Populasi: ±400 rumpun/ha<br>
+          Umur panen: 12–18 bulan<br>
+          Produksi: ±2 tandan/rumpun
+        </div>
+        <div class="kom-est">💰 Est. Pendapatan: Rp 12.000.000/ha</div>
+      </div>
+    </div>
+
+    <div class="sec-title"><span class="ico">📅</span> Jadwal Panen Estimasi</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Komoditas</th><th>Tanam</th><th>Panen</th><th>Durasi</th><th>Frekuensi</th></tr></thead>
+        <tbody>
+          <tr><td>🎃 Labu Ceper</td><td>Minggu 4</td><td>Minggu 12–14</td><td>60–90 hari</td><td>1× per musim</td></tr>
+          <tr><td>🌽 Jagung</td><td>Minggu 4</td><td>Minggu 14–16</td><td>90–100 hari</td><td>1× per musim</td></tr>
+          <tr><td>🍌 Pisang Talasa</td><td>Minggu 4</td><td>Minggu 16–20+</td><td>12–18 bulan</td><td>Bertahap/kontinu</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== TAB: SAPRODI ===================== -->
+  <div id="tab-saprodi" class="tab-panel">
+    <div class="sec-title"><span class="ico">🌱</span> Sarana Produksi (Saprodi) Per Hektar</div>
+    <div class="chips">
+      <span class="chip">🌾 Benih & Bibit</span>
+      <span class="chip">🪣 Pupuk</span>
+      <span class="chip">🧪 Pestisida</span>
+      <span class="chip">🎋 Pelengkap</span>
+    </div>
+    <div class="tbl-wrap">
+      <table id="tblSaprodi">
+        <thead>
+          <tr>
+            <th style="width:40px">No</th>
+            <th>Nama Saprodi</th>
+            <th>Spesifikasi</th>
+            <th>Satuan</th>
+            <th>Volume</th>
+            <th>Harga Satuan</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="saprodiTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== TAB: TENAGA KERJA ===================== -->
+  <div id="tab-tenagakerja" class="tab-panel">
+    <div class="sec-title"><span class="ico">👷</span> Jadwal & Kebutuhan Tenaga Kerja</div>
+    <div class="timeline" id="timelineWrap"></div>
+  </div>
+
+  <!-- ===================== TAB: ANALISIS ===================== -->
+  <div id="tab-analisis" class="tab-panel">
+    <div class="sec-title"><span class="ico">📈</span> Analisis Kelayakan Usaha</div>
+
+    <!-- TOGGLE OPSI -->
+    <div class="opsi-toggle-wrap">
+      <button class="opsi-btn active" id="btn-o1-an" onclick="setOpsi(1)">
+        Opsi 1 – Upah HOK
+        <span class="opsi-badge badge-hok">Bayar Tunai</span>
+      </button>
+      <button class="opsi-btn bh" id="btn-o2-an" onclick="setOpsi(2)">
+        Opsi 2 – Bagi Hasil
+        <span class="opsi-badge badge-bh">50 : 50</span>
+      </button>
+    </div>
+
+    <!-- OPSI 1 -->
+    <div id="an-opsi1">
+      <div class="cards" style="margin-bottom:24px">
+        <div class="card green-fill">
+          <div class="label">B/C Ratio (1 Ha)</div>
+          <div class="value" id="bcRatio">—</div>
+          <div class="sub">>1 = Layak diusahakan</div>
+        </div>
+        <div class="card">
+          <div class="label">ROI (1 Ha)</div>
+          <div class="value" id="roiVal">—</div>
+          <div class="sub">Return on Investment</div>
+        </div>
+        <div class="card accent">
+          <div class="label">BEP Labu Ceper</div>
+          <div class="value">~2.100 butir</div>
+          <div class="sub">Break Even Point/ha</div>
+        </div>
+      </div>
+
+      <div class="analisis-grid">
+        <div class="analisis-box">
+          <h3>💰 Ringkasan Finansial (1 Ha)</h3>
+          <div class="analisis-row"><span class="key">Total Pendapatan</span><span class="val" id="an-pend">—</span></div>
+          <div class="analisis-row"><span class="key">Total Biaya (+ HOK)</span><span class="val" id="an-biaya">—</span></div>
+          <div class="analisis-row"><span class="key">Laba Bersih</span><span class="val laba" id="an-laba">—</span></div>
+          <div class="analisis-row"><span class="key">B/C Ratio</span><span class="val ratio" id="an-bc">—</span></div>
+        </div>
+        <div class="analisis-box">
+          <h3>📦 Kontribusi Pendapatan</h3>
+          <div class="analisis-row"><span class="key">🎃 Labu Ceper</span><span class="val">Rp 18.000.000</span></div>
+          <div class="analisis-row"><span class="key">🌽 Jagung</span><span class="val">Rp 36.000.000</span></div>
+          <div class="analisis-row"><span class="key">🍌 Pisang</span><span class="val">Rp 12.000.000</span></div>
+          <div class="analisis-row"><span class="key" style="font-weight:700">Total</span><span class="val" id="an-tot-pend" style="font-weight:700;font-size:16px">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPSI 2 BAGI HASIL -->
+    <div id="an-opsi2" style="display:none">
+      <div class="bh-box">
+        <h3>🤝 Analisis Bagi Hasil 50:50</h3>
+        <p>Pemilik modal menanggung biaya saprodi, alat, dan irigasi. Pengelola menyediakan tenaga kerja penuh tanpa dibayar di muka. Setelah panen, pendapatan kotor dibagi dua.</p>
+      </div>
+      <div class="cards" style="margin-bottom:24px">
+        <div class="card purple-fill">
+          <div class="label">B/C Ratio Pemilik Modal</div>
+          <div class="value" id="bh-bc-modal">—</div>
+          <div class="sub">>1 = Layak</div>
+        </div>
+        <div class="card green-fill">
+          <div class="label">B/C Ratio Pengelola</div>
+          <div class="value" id="bh-bc-pengelola">—</div>
+          <div class="sub">Modal = nilai HOK</div>
+        </div>
+        <div class="card accent">
+          <div class="label">Nilai HOK Pengelola</div>
+          <div class="value" id="bh-nilai-hok">—</div>
+          <div class="sub">Kontribusi tenaga/ha</div>
+        </div>
+      </div>
+      <div class="analisis-grid">
+        <div class="analisis-box">
+          <h3>🏦 Pemilik Modal (per Ha)</h3>
+          <div class="analisis-row"><span class="key">Modal Dikeluarkan</span><span class="val" id="an-bh-modal-keluar">—</span></div>
+          <div class="analisis-row"><span class="key">Pendapatan Kotor</span><span class="val">Rp 66.000.000</span></div>
+          <div class="analisis-row"><span class="key">Bagian 50%</span><span class="val" id="an-bh-modal-bag">—</span></div>
+          <div class="analisis-row"><span class="key">Laba Bersih Modal</span><span class="val laba" id="an-bh-modal-laba">—</span></div>
+        </div>
+        <div class="analisis-box">
+          <h3>👨‍🌾 Pengelola (per Ha)</h3>
+          <div class="analisis-row"><span class="key">Modal (Nilai HOK)</span><span class="val" id="an-bh-hok">—</span></div>
+          <div class="analisis-row"><span class="key">Bagian 50%</span><span class="val" id="an-bh-peng-bag">—</span></div>
+          <div class="analisis-row"><span class="key">Laba Bersih Pengelola</span><span class="val laba" id="an-bh-peng-laba">—</span></div>
+          <div class="analisis-row"><span class="key">Ekuivalen HOK/hari</span><span class="val" id="an-bh-hok-eq">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASUMSI (selalu tampil) -->
+    <div class="analisis-box" style="margin-bottom:24px">
+      <h3>⚠️ Catatan & Asumsi</h3>
+      <div class="analisis-row"><span class="key">Harga jual labu</span><span class="val">Rp 6.000/butir (harga petani)</span></div>
+      <div class="analisis-row"><span class="key">Harga jual jagung</span><span class="val">Rp 9.000/kg pipil kering</span></div>
+      <div class="analisis-row"><span class="key">Harga jual pisang</span><span class="val">Rp 15.000/sisir (estimasi)</span></div>
+      <div class="analisis-row"><span class="key">Upah HOK (Opsi 1)</span><span class="val">Rp 100.000/HOK</span></div>
+      <div class="analisis-row"><span class="key">Bagi hasil (Opsi 2)</span><span class="val">50% pemilik modal & lahan : 50% pengelola</span></div>
+      <div class="analisis-row"><span class="key">Biaya tak terduga</span><span class="val">5% dari total biaya modal</span></div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<script>
+// ===== DATA =====
+const dataBiaya = [
+  { no:1,  nama:'Pemetaan & Perencanaan Lahan',    sat:'Paket', vol:1,   hsat:1500000, ket:'GPS, drone, peta lahan',          hok:false },
+  { no:2,  nama:'Pembersihan & Land Clearing',     sat:'Ha',    vol:1,   hsat:4000000, ket:'Chainsaw, parang, tenaga',        hok:false },
+  { no:3,  nama:'Pengolahan Tanah (Bajak/Cangkul)',sat:'Ha',    vol:1,   hsat:3500000, ket:'Traktor/manual',                  hok:false },
+  { no:4,  nama:'Pembuatan Bedengan/Guludan',      sat:'Ha',    vol:1,   hsat:2000000, ket:'Jarak tanam teratur',             hok:false },
+  { no:5,  nama:'Saprodi - Benih Labu Ceper',      sat:'Kg',    vol:2,   hsat:350000,  ket:'Varietas unggul, 3.000 lubang',   hok:false },
+  { no:6,  nama:'Saprodi - Benih Jagung',          sat:'Kg',    vol:15,  hsat:85000,   ket:'Varietas hibrida, 75×25 cm',      hok:false },
+  { no:7,  nama:'Saprodi - Bibit Pisang Talasa',   sat:'Batang',vol:400, hsat:5000,    ket:'Jarak 3×3m, 400 rumpun/ha',       hok:false },
+  { no:8,  nama:'Pupuk Dasar (Kandang/Organik)',   sat:'Ton',   vol:3,   hsat:800000,  ket:'3 ton/ha sebelum tanam',          hok:false },
+  { no:9,  nama:'Pupuk Kimia NPK',                 sat:'Kg',    vol:200, hsat:12000,   ket:'NPK 16-16-16',                    hok:false },
+  { no:10, nama:'Pestisida & Herbisida',           sat:'Paket', vol:1,   hsat:1500000, ket:'Fungisida, insektisida, roundup', hok:false },
+  { no:11, nama:'Mulsa Plastik',                   sat:'Roll',  vol:10,  hsat:350000,  ket:'Untuk labu & jagung',             hok:false },
+  { no:12, nama:'Tenaga Kerja Tanam',              sat:'HOK',   vol:60,  hsat:100000,  ket:'Tugal, sebar, tempel',            hok:true  },
+  { no:13, nama:'Tenaga Kerja Pemeliharaan',       sat:'HOK',   vol:80,  hsat:100000,  ket:'Penyiangan, pemupukan susulan',   hok:true  },
+  { no:14, nama:'Tenaga Kerja Panen',              sat:'HOK',   vol:40,  hsat:100000,  ket:'3 komoditas, bertahap',           hok:true  },
+  { no:15, nama:'Irigasi / Pengairan',             sat:'Paket', vol:1,   hsat:2000000, ket:'Selang, pompa jika diperlukan',   hok:false },
+  { no:16, nama:'Peralatan Pertanian',             sat:'Paket', vol:1,   hsat:1500000, ket:'Cangkul, sprayer, dll',           hok:false },
+];
+
+const dataSaprodi = [
+  { section: 'A. BENIH & BIBIT' },
+  { no:1,  nama:'Benih Labu Ceper',          spek:'Var. Unggul Lokal',       sat:'Kg',    vol:2,   hsat:350000 },
+  { no:2,  nama:'Benih Jagung Hibrida',      spek:'NK 22 / Bisi 18',         sat:'Kg',    vol:15,  hsat:85000 },
+  { no:3,  nama:'Bibit Pisang Talasa Ambon', spek:'Anakan sehat H 40cm',     sat:'Batang',vol:400, hsat:5000 },
+  { section: 'B. PUPUK' },
+  { no:4,  nama:'Pupuk Kandang Sapi',        spek:'Fermentasi matang',        sat:'Ton',   vol:3,   hsat:800000 },
+  { no:5,  nama:'Pupuk NPK 16-16-16',        spek:'Phonska / Mutiara',        sat:'Kg',    vol:200, hsat:12000 },
+  { no:6,  nama:'Pupuk Urea',                spek:'46% N',                    sat:'Kg',    vol:100, hsat:9000 },
+  { no:7,  nama:'Pupuk KCl',                 spek:'60% K2O',                  sat:'Kg',    vol:50,  hsat:11000 },
+  { no:8,  nama:'Pupuk SP-36',               spek:'36% P2O5',                 sat:'Kg',    vol:75,  hsat:10000 },
+  { no:9,  nama:'Pupuk Organik Cair (POC)',  spek:'Bio stimulan',             sat:'Liter', vol:10,  hsat:45000 },
+  { section: 'C. PESTISIDA & HERBISIDA' },
+  { no:10, nama:'Herbisida (Roundup)',        spek:'Pra/pasca tanam',          sat:'Liter', vol:4,   hsat:80000 },
+  { no:11, nama:'Insektisida (Decis/Regent)',spek:'Hama pengisap/ulat',       sat:'Liter', vol:2,   hsat:120000 },
+  { no:12, nama:'Fungisida (Antracol)',       spek:'Busuk buah/daun',          sat:'Kg',    vol:2,   hsat:95000 },
+  { section: 'D. PELENGKAP' },
+  { no:13, nama:'Mulsa Plastik Hitam Perak', spek:'Lebar 120cm',              sat:'Roll',  vol:10,  hsat:350000 },
+  { no:14, nama:'Ajir/Tongkat Labu',         spek:'Bambu 150cm',              sat:'Batang',vol:1000,hsat:800 },
+];
+
+const dataJadwal = [
+  { phase: 'FASE 1: PERSIAPAN LAHAN (Minggu 1–3)', items: [
+    { nama:'Pemetaan & pengukuran',  waktu:'Minggu 1',    hok:5  },
+    { nama:'Land clearing / babat',  waktu:'Minggu 1–2',  hok:20 },
+    { nama:'Pengolahan tanah',       waktu:'Minggu 2–3',  hok:15 },
+    { nama:'Pembuatan bedengan',     waktu:'Minggu 3',    hok:10 },
+  ]},
+  { phase: 'FASE 2: PENANAMAN (Minggu 4)', items: [
+    { nama:'Aplikasi pupuk dasar',   waktu:'Minggu 4',    hok:5  },
+    { nama:'Pemasangan mulsa',       waktu:'Minggu 4',    hok:8  },
+    { nama:'Tanam labu & jagung',    waktu:'Minggu 4',    hok:15 },
+    { nama:'Tanam bibit pisang',     waktu:'Minggu 4',    hok:7  },
+  ]},
+  { phase: 'FASE 3: PEMELIHARAAN (Minggu 5–16)', items: [
+    { nama:'Penyiraman & irigasi',   waktu:'Minggu 5–16', hok:20 },
+    { nama:'Pemupukan susulan',      waktu:'Minggu 6,10', hok:10 },
+    { nama:'Penyemprotan OPT',       waktu:'Kondisional', hok:12 },
+    { nama:'Penyiangan gulma',       waktu:'Minggu 7,12', hok:10 },
+    { nama:'Pasang ajir & rambatan', waktu:'Minggu 5–6',  hok:8  },
+  ]},
+  { phase: 'FASE 4: PANEN (Minggu 12–20+)', items: [
+    { nama:'Panen labu ceper',        waktu:'Minggu 12–14', hok:15 },
+    { nama:'Panen jagung',            waktu:'Minggu 14–16', hok:15 },
+    { nama:'Panen pisang (bertahap)', waktu:'Minggu 16–20+',hok:10 },
+  ]},
+];
+
+// ===== FORMAT =====
+function rp(n) { return 'Rp ' + Math.round(n).toLocaleString('id-ID'); }
+
+// ===== KALKULASI =====
+const PENDAPATAN = 18000000 + 36000000 + 12000000; // 66jt
+const HOK_TOTAL  = dataBiaya.filter(d=>d.hok).reduce((s,d)=>s+d.vol*d.hsat, 0); // 18jt
+
+function hitungBiaya(termasukHOK) {
+  const sub = dataBiaya.reduce((s,d) => s + (d.hok && !termasukHOK ? 0 : d.vol*d.hsat), 0);
+  const tt  = sub * 0.05;
+  return { sub, tt, total: sub + tt };
+}
+
+// ===== BUILD BIAYA TABLE (Opsi 1) =====
+function buildBiaya() {
+  const { sub, tt, total } = hitungBiaya(true);
+  const tb = document.getElementById('biayaTbody');
+  tb.innerHTML = '';
+  dataBiaya.forEach(d => {
+    const tot = d.vol * d.hsat;
+    const tr = document.createElement('tr');
+    if (d.hok) tr.style.background = '#fff8e1';
+    tr.innerHTML = `
+      <td>${d.no}</td>
+      <td>${d.nama}${d.hok ? ' <span style="background:#f9c74f;color:#7b5c00;font-size:10px;padding:2px 6px;border-radius:8px;font-weight:700;margin-left:4px">HOK</span>' : ''}</td>
+      <td>${d.sat}</td>
+      <td class="num">${d.vol.toLocaleString('id-ID')}</td>
+      <td class="num rp">${rp(d.hsat)}</td>
+      <td class="num rp">${rp(tot)}</td>
+      <td class="num rp">${rp(tot*4)}</td>
+      <td>${d.ket}</td>`;
+    tb.appendChild(tr);
+  });
+  const trtt = document.createElement('tr');
+  trtt.innerHTML = `<td>17</td><td>Biaya Tak Terduga (5%)</td><td>Ls</td><td>1</td><td class="rp">—</td><td class="num rp">${rp(tt)}</td><td class="num rp">${rp(tt*4)}</td><td>5% dari subtotal</td>`;
+  tb.appendChild(trtt);
+  const trtot = document.createElement('tr');
+  trtot.className = 'total-row';
+  trtot.innerHTML = `<td colspan="5" style="text-align:left;padding-left:14px">TOTAL BIAYA (termasuk HOK)</td><td class="num">${rp(total)}</td><td class="num">${rp(total*4)}</td><td></td>`;
+  tb.appendChild(trtot);
+
+  const laba = PENDAPATAN - total;
+  const bc   = PENDAPATAN / total;
+  const roi  = (laba / total) * 100;
+  document.getElementById('totalBiaya1Ha').textContent = rp(total);
+  document.getElementById('totalBiaya4Ha').textContent = rp(total*4);
+  document.getElementById('totalPend1Ha').textContent  = rp(PENDAPATAN);
+  document.getElementById('laba1Ha').textContent       = rp(laba);
+  document.getElementById('bcRatio').textContent       = bc.toFixed(2) + 'x';
+  document.getElementById('roiVal').textContent        = roi.toFixed(1) + '%';
+  document.getElementById('an-pend').textContent       = rp(PENDAPATAN);
+  document.getElementById('an-biaya').textContent      = rp(total);
+  document.getElementById('an-laba').textContent       = rp(laba);
+  document.getElementById('an-bc').textContent         = bc.toFixed(2) + 'x';
+  document.getElementById('an-tot-pend').textContent   = rp(PENDAPATAN);
+}
+
+// ===== BUILD BIAYA BAGI HASIL (Opsi 2) =====
+function buildBiayaBH() {
+  const { sub, tt, total } = hitungBiaya(false); // tanpa HOK
+  const bagModal    = PENDAPATAN * 0.5;
+  const bagPengelola= PENDAPATAN * 0.5;
+  const labaModal   = bagModal - total;
+  const labaPengelola = bagPengelola - HOK_TOTAL;
+  const bcModal     = bagModal / total;
+  const bcPengelola = bagPengelola / HOK_TOTAL;
+  const hokEq       = bagPengelola / 180; // estimasi 180 hari kerja
+
+  // Tabel biaya modal (tanpa HOK)
+  const tb = document.getElementById('biayaBHTbody');
+  tb.innerHTML = '';
+  dataBiaya.filter(d=>!d.hok).forEach((d,idx) => {
+    const tot = d.vol * d.hsat;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${d.no}</td><td>${d.nama}</td><td>${d.sat}</td>
+      <td class="num">${d.vol.toLocaleString('id-ID')}</td>
+      <td class="num rp">${rp(d.hsat)}</td>
+      <td class="num rp">${rp(tot)}</td>
+      <td class="num rp">${rp(tot*4)}</td>
+      <td>${d.ket}</td>`;
+    tb.appendChild(tr);
+  });
+  // HOK baris info
+  const trHok = document.createElement('tr');
+  trHok.style.background = '#f0e6fa';
+  trHok.innerHTML = `<td colspan="2" style="text-align:left;padding-left:14px;color:#7b3f9e;font-weight:700">👨‍🌾 Tenaga Kerja (ditanggung Pengelola)</td>
+    <td>HOK</td><td class="num">180</td><td class="rp" style="color:#7b3f9e">—</td>
+    <td colspan="2" style="text-align:center;color:#7b3f9e;font-weight:700">Tidak dibayar tunai</td>
+    <td style="color:#7b3f9e;font-size:12px">Nilai ekuiv. ${rp(HOK_TOTAL)}</td>`;
+  tb.appendChild(trHok);
+  // Tak terduga
+  const trtt = document.createElement('tr');
+  trtt.innerHTML = `<td>—</td><td>Biaya Tak Terduga (5%)</td><td>Ls</td><td>1</td><td class="rp">—</td><td class="num rp">${rp(tt)}</td><td class="num rp">${rp(tt*4)}</td><td>5% dari modal</td>`;
+  tb.appendChild(trtt);
+  const trtot = document.createElement('tr');
+  trtot.className = 'total-row';
+  trtot.style.background = '#7b3f9e';
+  trtot.innerHTML = `<td colspan="5" style="text-align:left;padding-left:14px">TOTAL MODAL PEMILIK (tanpa HOK)</td><td class="num">${rp(total)}</td><td class="num">${rp(total*4)}</td><td></td>`;
+  tb.appendChild(trtot);
+
+  // Tabel simulasi bagi hasil
+  const tbSim = document.getElementById('bhSimTbody');
+  tbSim.innerHTML = '';
+  const simRows = [
+    ['Total Pendapatan Kotor', PENDAPATAN, PENDAPATAN*4, 'Semua komoditas'],
+    ['Modal Dikeluarkan Pemilik', total, total*4, 'Saprodi + alat + irigasi + 5%'],
+    ['Nilai Kontribusi Pengelola (HOK)', HOK_TOTAL, HOK_TOTAL*4, 'Estimasi nilai tenaga kerja'],
+    [null, null, null, null], // separator
+    ['Bagian Pemilik Modal (50%)', bagModal, bagModal*4, '50% × pendapatan kotor'],
+    ['Laba Bersih Pemilik', labaModal, labaModal*4, 'Bagian − modal dikeluarkan'],
+    ['Bagian Pengelola (50%)', bagPengelola, bagPengelola*4, '50% × pendapatan kotor'],
+    ['Laba Bersih Pengelola', labaPengelola, labaPengelola*4, 'Bagian − nilai HOK'],
+  ];
+  simRows.forEach((row, idx) => {
+    if (!row[0]) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td colspan="4" style="background:#f5f5f5;height:6px;border:none"></td>`;
+      tbSim.appendChild(tr);
+      return;
+    }
+    const tr = document.createElement('tr');
+    const isBold = idx >= 4;
+    const bg = idx >= 4 ? (idx % 2 === 0 ? '#f0e6fa' : '#e8f5e9') : '';
+    tr.style.background = bg;
+    tr.innerHTML = `
+      <td style="text-align:left;font-weight:${isBold?'700':'400'}">${row[0]}</td>
+      <td class="num rp" style="font-weight:${isBold?'700':'400'};color:${isBold?'var(--hijau)':'inherit'}">${rp(row[1])}</td>
+      <td class="num rp" style="font-weight:${isBold?'700':'400'};color:${isBold?'var(--hijau)':'inherit'}">${rp(row[2])}</td>
+      <td style="text-align:left;font-size:12px;color:#666">${row[3]}</td>`;
+    tbSim.appendChild(tr);
+  });
+
+  // Update cards Opsi 2
+  document.getElementById('bh-modal-keluar').textContent   = rp(total);
+  document.getElementById('bh-modal-keluar4').textContent  = rp(total*4);
+  document.getElementById('bh-pend-kotor').textContent     = rp(PENDAPATAN);
+  document.getElementById('bh-modal-1ha-card').textContent = rp(bagModal);
+  document.getElementById('bh-modal-1ha').textContent      = rp(bagModal);
+  document.getElementById('bh-pengelola-1ha').textContent  = rp(bagPengelola);
+
+  // Analisis tab Opsi 2
+  document.getElementById('bh-bc-modal').textContent       = bcModal.toFixed(2) + 'x';
+  document.getElementById('bh-bc-pengelola').textContent   = bcPengelola.toFixed(2) + 'x';
+  document.getElementById('bh-nilai-hok').textContent      = rp(HOK_TOTAL);
+  document.getElementById('an-bh-modal-keluar').textContent= rp(total);
+  document.getElementById('an-bh-modal-bag').textContent   = rp(bagModal);
+  document.getElementById('an-bh-modal-laba').textContent  = rp(labaModal);
+  document.getElementById('an-bh-hok').textContent         = rp(HOK_TOTAL);
+  document.getElementById('an-bh-peng-bag').textContent    = rp(bagPengelola);
+  document.getElementById('an-bh-peng-laba').textContent   = rp(labaPengelola);
+  document.getElementById('an-bh-hok-eq').textContent      = rp(hokEq) + '/hari';
+}
+
+// ===== BUILD SAPRODI TABLE =====
+function buildSaprodi() {
+  const tb = document.getElementById('saprodiTbody');
+  let total = 0;
+  dataSaprodi.forEach(d => {
+    if (d.section) {
+      const tr = document.createElement('tr');
+      tr.className = 'section-row';
+      tr.innerHTML = `<td colspan="7">${d.section}</td>`;
+      tb.appendChild(tr);
+    } else {
+      const tot = d.vol * d.hsat;
+      total += tot;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${d.no}</td><td>${d.nama}</td><td>${d.spek}</td><td>${d.sat}</td>
+        <td class="num">${d.vol.toLocaleString('id-ID')}</td>
+        <td class="num rp">${rp(d.hsat)}</td>
+        <td class="num rp">${rp(tot)}</td>`;
+      tb.appendChild(tr);
+    }
+  });
+  const trTot = document.createElement('tr');
+  trTot.className = 'total-row';
+  trTot.innerHTML = `<td colspan="6" style="text-align:left;padding-left:14px">TOTAL BIAYA SAPRODI PER HEKTAR</td><td class="num">${rp(total)}</td>`;
+  tb.appendChild(trTot);
+}
+
+// ===== BUILD TIMELINE =====
+function buildTimeline() {
+  const wrap = document.getElementById('timelineWrap');
+  dataJadwal.forEach(ph => {
+    const div = document.createElement('div');
+    div.className = 'tl-phase';
+    const titDiv = document.createElement('div');
+    titDiv.className = 'tl-phase-title';
+    titDiv.textContent = ph.phase;
+    div.appendChild(titDiv);
+    const itemsDiv = document.createElement('div');
+    itemsDiv.className = 'tl-items';
+    ph.items.forEach(it => {
+      const d = document.createElement('div');
+      d.className = 'tl-item';
+      d.innerHTML = `<div class="nama">${it.nama}</div><div class="waktu">⏱ ${it.waktu}</div>
+        <div class="hok" style="color:var(--hijau)">👷 ${it.hok} HOK — <span style="color:#7b3f9e;font-weight:700">Opsi 1: ${rp(it.hok*100000)}</span></div>
+        <div style="font-size:11px;color:#7b3f9e;margin-top:2px">🤝 Opsi 2: Ditanggung Pengelola</div>`;
+      itemsDiv.appendChild(d);
+    });
+    div.appendChild(itemsDiv);
+    wrap.appendChild(div);
+  });
+}
+
+// ===== TOGGLE OPSI =====
+let opsiAktif = 1;
+function setOpsi(n) {
+  opsiAktif = n;
+  // Toggle buttons
+  ['btn-o1-rks','btn-o1-an'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.toggle('active', n===1); }
+  });
+  ['btn-o2-rks','btn-o2-an'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.toggle('active', n===2); }
+  });
+  // Toggle sections Ringkasan
+  const o1r = document.getElementById('rks-opsi1');
+  const o2r = document.getElementById('rks-opsi2');
+  if (o1r) o1r.style.display = n===1 ? 'block' : 'none';
+  if (o2r) o2r.style.display = n===2 ? 'block' : 'none';
+  // Toggle sections Analisis
+  const o1a = document.getElementById('an-opsi1');
+  const o2a = document.getElementById('an-opsi2');
+  if (o1a) o1a.style.display = n===1 ? 'block' : 'none';
+  if (o2a) o2a.style.display = n===2 ? 'block' : 'none';
+}
+
+// ===== TAB SWITCH =====
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ===== INIT =====
+buildBiaya();
+buildBiayaBH();
+buildSaprodi();
+buildTimeline();
+</script>
+
+</body>
+</html>
